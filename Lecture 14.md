@@ -86,3 +86,15 @@ Cases:
 
 The choice depends on the next input symbol, so we add a lookahead to the automation to fix conflict. For each $A\rightarrow \alpha\cdot\;$, attach $\text{Follow}(A)$.
 
+#### Resolving Conflicts
+
+Note that $\text{Follow}(T)=\{+,\dashv\}$, and $\text{Follow}(E)=\{\dashv\}$. So when we are at the following state:
+$$
+\begin{align*}
+&E\rightarrow T\cdot +E\\
+&E\rightarrow T\cdot
+\end{align*}
+$$
+If the follow is $+$, then we use the first rule. Similarly, if the follow is $\dashv$, then we use the second. Any symbol other than $+$ and $\dashv$ will give an `ERROR`.
+
+> **Interpretation:** We have a reduce action $A\rightarrow \alpha\cdot\;X$, where $X=\text{Follow}(A)$. The action only applies when the next input symbol is in $X$. 
