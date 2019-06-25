@@ -98,3 +98,5 @@ $$
 If the follow is $+$, then we use the first rule. Similarly, if the follow is $\dashv$, then we use the second. Any symbol other than $+$ and $\dashv$ will give an `ERROR`.
 
 > **Interpretation:** We have a reduce action $A\rightarrow \alpha\cdot\;X$, where $X=\text{Follow}(A)$. The action only applies when the next input symbol is in $X$. 
+
+This result is called $SLR(1)$.
