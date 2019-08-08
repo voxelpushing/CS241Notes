@@ -1,10 +1,10 @@
 # Lecture 8
 
-#### $\epsilon$-NFA
+#### $\varepsilon$-NFA
 
-We can have $\epsilon$ transitions, which are transitions that consume $\epsilon$, the empty string. What this does is that we can break down two separate pieces of an NFA as 2 parts of an $\epsilon$ transition. This removes the possibility of going from one machine to another as part of an NFA.
+We can have $\varepsilon$ transitions, which are transitions that consume $\varepsilon$, the empty string. What this does is that we can break down two separate pieces of an NFA as 2 parts of an $\varepsilon$ transition. This removes the possibility of going from one machine to another as part of an NFA.
 
-**Example:** $L=\{cab\}\cup \{\text{even number of } a's\}$, $\Sigma=\{a,b,c\}$
+**Example:** $L=\{cab\}\cup \{\text{even number of $a$'s}\}$, $\Sigma=\{a,b,c\}$
 
 ```mermaid
 graph LR
@@ -37,7 +37,7 @@ D-- b -->G
 
 Converting an NFA to a DFA is like tracing through all the possible states to be in for the NFA, and creating a state in the DFA for that. Then, we connect all the possible states with the possible transitions between them.
 
-**Example:** $\epsilon$-NFA to DFA
+**Example:** $\varepsilon$-NFA to DFA
 
 We need to consider:
 
@@ -68,16 +68,16 @@ The possible starting states are: 1, 2, 6, 7. From those states, if we get an $a
 
 > **Definition**
 >
-> Let $S$ be a subset of states of an NFA. The **ε-closure($S$)** is the set of all states reachable from a state in $S$ by 0 or more ε-transitions.
+> Let $S$ be a subset of states of an NFA. The **$\text{ε-closure}(S)$** is the set of all states reachable from a state in $S$ by 0 or more ε-transitions.
 
-So, ε-closure({3, 9, 8}) = {3, 9, 8, 4}. In the DFA, we can have:
+So, $\text{ε-closure}({3, 9, 8}) = \{3, 9, 8, 4\}$. In the DFA, we can have:
 
 ```mermaid
 graph LR
 A(1, 2, 6, 7)--a-->B(3, 9, 8, 4)
 ```
 
-Still using the example above, if we want ε-closure({1}), we have:
+Still using the example above, if we want $\text{ε-closure}(1)$, we have:
 $$
 \{1\}\Rightarrow\{1, 2, 6\}\Rightarrow\{1,2,6,7\}\Rightarrow\{1,2,6,7\}
 $$
@@ -147,11 +147,29 @@ However, this does not mean that things in $LL^*$ is a valid C program. We do no
 
 No. They are not. For example, if we have $O^*$, and a subset is $O^i$, where $i$ is prime. If we want a DFA for $O^i$, we need to go through infinitely many states, since there are infinite prime numbers, with no pattern to generate them. Hence $O^i$ is not regular.
 
+A possible DFA for $LL^*$:
+
+```mermaid
+graph LR
+A[Start]
+B(DFA for C Keywords)
+C(DFA for C identifiers)
+D(DFA for Punctuation)
+A--ε-->B
+A--ε-->C
+A--ε-->D
+B--ε-->A
+C--ε-->A
+D--ε-->A
+```
+
+From the start state, do an $\varepsilon$ transition to all "tokens" for C. Then from the accepting state of each, transition back to the start for $LL^*$.
+
 ---
 
 ###Unique Decomposition
 
-The following is an $\epsilon$-NFA for valid C identifiers:
+The following is an $\varepsilon$-NFA for valid C identifiers:
 
 ![image-20190530094503078](/Users/kevinhua/Library/Application Support/typora-user-images/image-20190530094503078.png)
 
@@ -163,3 +181,10 @@ We emit the token, and return to the start state to start recognizing the next t
 * $\cdots$
 
 So to prevent this, we try to only transition when we have the longest possible token. This is also a problem. Example: $L=\{aa,aaa\}$, and let an input string $w=aaaa$. If we just choose $aaa$, then we have an $a$ left over, and the program will crash even though its valid.
+
+```C
+int a = 2;
+int b = 3;
+a+++b;			// works 
+a+++++b;		// does not work since ++ returns an lvalue, and you can't do ++ on an lvalue
+```

@@ -165,4 +165,4 @@ Two choices we have to approach this:
   $$
   Use the stack to store the intermediate $\alpha_i$ in reverse, and match against chars in $w$.
 
-  **Invariant:** consumed input $+$ reverse(stack contents) $=\alpha_i$
+  **Invariant:** consumed input $+$ $\text{Reverse(stack contents)} =\alpha_i$

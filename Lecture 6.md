@@ -8,12 +8,12 @@
   * like $\Sigma=\{a,b,c\}$
 * **String** (or **word**) - finite sequence of symbols from $\Sigma$.
   * Length of a string $w$ is $|w|$
-  * The empty string is denoted by $\epsilon$, and $|\epsilon|=0$
-  * If $\epsilon$ is the empty string (not a char), and $\Sigma=\{a\}$, is $a=\epsilon a\epsilon$? Yes, since $\epsilon$ does not have any characters
+  * The empty string is denoted by $\varepsilon$, and $|\varepsilon|=0$
+  * If $\varepsilon$ is the empty string (not a char), and $\Sigma=\{a\}$, is $a=\varepsilon a\varepsilon$? Yes, since $\varepsilon$ does not have any characters
 * **Language** - set of strings.
   * $\{\}$ or ∅
-  * $\{\epsilon\}$ is a singleton set, since the entire language only has 1 string
-  * $\{\epsilon\} =\{\epsilon,\epsilon\epsilon\}$, since $\epsilon\epsilon=\epsilon$
+  * $\{\varepsilon\}$ is a singleton set, since the entire language only has 1 string
+  * $\{\varepsilon\} =\{\varepsilon,\varepsilon\varepsilon\}$, since $\varepsilon\varepsilon=\varepsilon$
 
 ---
 
@@ -28,7 +28,7 @@ Every finite language is regular.
 * **Union**: $L_1\cup L_2 = \{x:x\in L_1 \text{ or } x\in L_2\}$
 * **Concatenation**: $L_1\cdot L_2 = L_1L_2 = \{xy:x\in L_1,y\in L_2\}$
 * **Kleene Star**: $L^*$ is the set of all strings consisting of 0 or more occurences of strings from $L$ concatenated together
-* $\Sigma^*$ is all strings possible composed of alphabet symbols, and $\epsilon$. It is a language
+* $\Sigma^*$ is all strings possible composed of alphabet symbols, and $\varepsilon$. It is a language
 
 #### Regular Expressions
 
@@ -55,7 +55,7 @@ Formally, a DFA $M$ is a 5-tuple $M=(\Sigma, Q, q_0, A, \delta)$, where:
 * $Q$ is a non-empty finite set of states
 * $q_0$ is the start state
 * $A \subseteq Q$ is a set of accepting states
-* $\delta: (Q\times E) \rightarrow Q$ is a transition function
+* $\delta: (Q\times \Sigma) \rightarrow Q$ is a transition function
   * Given a current state and an input, go to the next state
 
 DFA $M$ for determining if a string is in $(aa)^*b$:
@@ -74,7 +74,7 @@ D -- a,b --> E
 
 The language of $M$ is denoted $L(M)$, which is the set of strings accepted by $M$.
 
-The extended transition function $\delta^*$ applies the standard transition function on each char in a word, until the word is finally $\epsilon$:
+The extended transition function $\delta^*$ applies the standard transition function on each char in a word, until the word is finally $\varepsilon$:
 
 * Base case: $\delta^*(q, \epsilon) = q$
 * Recursive case: $\delta^*(q, cw) = \delta^*(\delta(q,c),w)$, where $c\in\Sigma$ and $w\in\Sigma^*$. So $cw$ is a non-empty string.

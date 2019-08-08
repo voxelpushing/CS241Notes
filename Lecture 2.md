@@ -56,8 +56,8 @@ The example `0000 0001 0001 1011 0011 1000 0010 0000` would translate into:`0x01
 
 ### RAM
 
-- Big array of **n** bytes (**n** is large), away from the CPU 
-- Each cell has an address 0, 1, 2, ..., **n**-1 
+- Big array of $n$ bytes ($n$ is large), away from the CPU 
+- Each cell has an address 0, 1, 2, ..., $n-1$
 - Each 4-byte block 4*k*, . . ., 4*k*+3 (for *k*=0,1,. . .) is a word 
 - Words have addresses 0, 4, 8, c, 10, 14, 18, 1c, … (counting up by 4 in hex)
 - Known as *word aligned*; i.e. divisible by 4 
@@ -67,7 +67,7 @@ The example `0000 0001 0001 1011 0011 1000 0010 0000` would translate into:`0x01
 
 We have two operations: load and store.
 
-Load transfers a word from a source address in RAM into a target register. The address is stored in the **Memory Address Register (MAR)**. The address then goes through the bus to the RAM, the data is returned on the bus and stored into the **Memory Data Register (MDR)**. The contens of the MDR is then moved to the target register. These registers are separate from the ones in general use.
+Load transfers a word from a source address in RAM into a target register. The address is stored in the **Memory Address Register (MAR)**. The address then goes through the bus to the RAM, the data is returned on the bus and stored into the **Memory Data Register (MDR)**. The contents of the MDR is then moved to the target register. These registers are separate from the ones in general use.
 
 Store just happens in reverse .
 

@@ -12,7 +12,7 @@ We have the following MIPS code for storing the params on the stack:
 
 ```assembly
 sw $1, -4($30)
-sw $2, -8($30)
+sw $2, -8($30)	
 lis $4
 .word 4
 sub $30, $30, $4

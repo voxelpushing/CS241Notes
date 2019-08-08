@@ -4,7 +4,7 @@
 >
 > * No two distinct productions with the same LHS can generate the same first terminal symol
 > * No nullable symbol $A$ has the same terminal symbol $a$ in both its $\text{First}$ and $\text{Follow}$ sets
-> * There is only one way to send a nullale symbol to $\epsilon$
+> * There is only one way to send a nullable symbol to $\varepsilon$
 
 **Example**
 
@@ -26,9 +26,9 @@ We have two derivations to get the same first symbol, so not $LL(1)$. The key pr
 The following is $LL(1)$ by factoring out the various choices for different production rules:
 
 * $E \rightarrow TE'$
-* $E'\rightarrow \epsilon \,|\, +E$
+* $E'\rightarrow \varepsilon \,|\, +E$
 * $T\rightarrow FT'$
-* $T' \rightarrow \epsilon \,|\, *T$
+* $T' \rightarrow \varepsilon \,|\, *T$
 * $F\rightarrow a\,|\,b\,|\,c$
 
 This grammar is *right associative* (we don't want right associativity), given by the parse tree for $a+a+a$:
@@ -77,7 +77,7 @@ $$
 * $A\rightarrow ab$
 * $A \rightarrow cd$
 * $B \rightarrow z$
-* $B \rightarrow wa$
+* $B \rightarrow wx$
 
 At each step:
 
@@ -86,20 +86,20 @@ At each step:
 
 |     **Stack**     |       **Read**        |        Unread         |                        **Action**                        |
 | :---------------: | :-------------------: | :-------------------: | :------------------------------------------------------: |
-|                   |      $\epsilon$       | $\vdash abywx \dashv$ |                      shift $\vdash$                      |
+|                   |     $\varepsilon$     | $\vdash abywx \dashv$ |                      shift $\vdash$                      |
 |     $\vdash$      |       $\vdash$        |     $abywx\dashv$     |                        shift $a$                         |
 |    $\vdash a$     |      $\vdash a$       |     $bywx \dashv$     |                        shift $b$                         |
 |    $\vdash ab$    |      $\vdash ab$      |      $ywx\dashv$      | Reduce $A\rightarrow ab$<br />pop $b$, pop $a$, push $A$ |
 |    $\vdash A$     |      $\vdash ab$      |      $ywx\dashv$      |      shift $y$ ($\vdash A$ doesn't match any rules)      |
 |    $\vdash Ay$    |     $\vdash aby$      |      $wx\dashv$       |                        shift $w$                         |
 |   $\vdash Ayw$    |     $\vdash abyw$     |       $x\dashv$       |                        shift $x$                         |
-|   $\vdash Aywx$   |    $\vdash abywx$     |       $\dashv$        | Reduce $B\rightarrow wa$<br />pop $x$, pop $w$, push $B$ |
+|   $\vdash Aywx$   |    $\vdash abywx$     |       $\dashv$        | Reduce $B\rightarrow wx$<br />pop $x$, pop $w$, push $B$ |
 |   $\vdash AyB$    |    $\vdash abywx$     |       $\dashv$        |                     Reduce $S->AyB$                      |
 |    $\vdash S$     |    $\vdash abywx$     |       $\dashv$        |                      shift $\dashv$                      |
 | $\vdash S \dashv$ | $\vdash abywx \dashv$ |                       |          Reduce $S'\rightarrow \vdash S \dashv$          |
 |       $S'$        | $\vdash abywx \dashv$ |                       |                          Accept                          |
 
-We accept if the stack only contains $S'$ when the input is $\epsilon$.
+We accept if the stack only contains $S'$ when the input is $\varepsilon$.
 
 At each step, how do we know whether to shift or reduce:
 
@@ -116,7 +116,7 @@ Since the set above is a regular language, it can be described by a DFA. We can 
 * $S' \rightarrow \; \vdash E \dashv$
 * $E \rightarrow E+T$
 * $E \rightarrow T$
-* $T\rightarrow id$
+* $T\rightarrow \text{id}$
 
 **Definition:** An item is a production with a dot ($\;\boldsymbol{\cdot}\;$),  somewhere on the RHS (indicate partially completed rules).
 

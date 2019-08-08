@@ -21,7 +21,7 @@ When we having something at the top of the stack we want to pop and reduce, do t
 * Pop the top of the stack, and backtrack one step in the DFA
 * Put the reduced symbol onto the top of stack, and transition using the reduced symbol
 
-For example at $T\rightarrow id\cdot\quad$, we pop $id$ off the stack, go back along $id$, then push $T$ onto the stack, and follow the transition for $T$.
+For example at $T\rightarrow \text{id}\cdot\;$, we pop $\text{id}$ off the stack, go back along $\text{id}$, then push $T$ onto the stack, and follow the transition for $T$.
 
 Once we backtrack everything, if only $S'$ is on the stack, and no more input is received, then we accept. To backtrack, we need to keep track of all the steps. So, we push the states onto the stack as well as the symbols.
 

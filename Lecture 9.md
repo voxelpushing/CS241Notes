@@ -2,17 +2,17 @@
 
 ### Maximal Munch Algorithm
 
-- Run the DFA without $\epsilon$ transitions until we only have error transitions left
+- Run the DFA without $\varepsilon$ transitions until we only have error transitions left
 - If we end up in an accepting state, emit the token 
 - Otherwise, backtrack to the most recently seen accepting state, emit, and resume
-- FInally, do an $\epsilon$-transition back to the start
+- FInally, do an $\varepsilon$-transition back to the start
 
 This is a good algorithm and all, but yanno them compilers wanna be fast and shit, so we have the following.
 
 ### Simplified Maximal Munch Algorithm
 
-* Run the DFA without $\epsilon$ transitions until we only have error transitions left
-* If we end up in an accepting state, emit the token, and do an $\epsilon$-transition back to the start
+* Run the DFA without $\varepsilon$ transitions until we only have error transitions left
+* If we end up in an accepting state, emit the token, and do an $\varepsilon$-transition back to the start
 * Otherwise, give the mans an `ERROR`
 
 #####Example: Create a DFA for $\Sigma=\{(,)\}$, and $L=\{\text{strings of balanced parentheses}\}$
@@ -41,12 +41,12 @@ These are languages that can be described by a **context-free grammar**, essenti
 Let $S$ be a placeholder for a string (non-terminal symbol) with balanced parentheses, then all strings with balanced parenthesis can be made by the following **production rules**:
 
 * $S\rightarrow (S)$
-* $S \rightarrow \epsilon$
+* $S \rightarrow \varepsilon$
 * $S\rightarrow SS$
 
-For example, "(())" can be made by
+For example, `(())` can be made by
 $$
-S\rightarrow(S) \rightarrow((S)) \rightarrow((\epsilon))\rightarrow(())
+S\rightarrow(S) \rightarrow((S)) \rightarrow((\varepsilon))\rightarrow(())
 $$
 
 ### Context-Free Grammars (CFG)
@@ -68,27 +68,27 @@ The production rules from above for balanced parentheses can be written as $S\ri
 
 The application of a production rule is called a **derivation**. We use the symbol $\Rightarrow$.
 
-* $\alpha\Rightarrow\beta$, $\beta$ can be derived from $\alpha$
-* $\alpha\Rightarrow^k\beta$, $\beta$ can be derived from $\alpha$ after $k$ derivations
-* $\alpha\Rightarrow^*\beta$, $\beta$ can be derived from $\alpha$ after 0 or more derivations
+* $\alpha\Rightarrow\beta$  means $\beta$ can be derived from $\alpha$
+* $\alpha\Rightarrow^k\beta$ means $\beta$ can be derived from $\alpha$ after $k$ derivations
+* $\alpha\Rightarrow^*\beta$ means $\beta$ can be derived from $\alpha$ after 0 or more derivations
 
 #### Intermediate Forms
 
 Intermediate steps may have the form:
 $$
-\alpha A\beta \Rightarrow\alpha\gamma\beta\text{ if there is a production } A\rightarrow\gamma \text{ in }P
+\alpha A\beta \Rightarrow\alpha\gamma\beta\;\text{if there is a production  } A\rightarrow\gamma \text{ in }P
 $$
 
 > The **language** of a CFG $G$ is the set of strings (terminals only) that we can be derived from the starting non-terminal $S$
 > $$
-> L(G)=\{w\in\Sigma^*|S\Rightarrow^*w\}
+> L(G)=\{w\in\Sigma^*|\,S\Rightarrow^*w\}
 > $$
 
 **Example:** CFG for palindromes where $\Sigma=\{a,b,c\}$
 
 Production rules:
 
-* $S\rightarrow\epsilon$
+* $S\rightarrow\varepsilon$
 * $S\rightarrow a\,|\,b\,|\,c$
 * $S\rightarrow aSa\,|\,bSb\,|\,cSc$
 

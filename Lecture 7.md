@@ -70,7 +70,7 @@ C-- "b" -->D
 A-- a,b -->A
 ```
 
-At the beginning, if we have an "a", which path to we take? Do we go to the next a, or cycle on start? The answer is we take both paths, and if we take both, we are sure to eventually go on the right path. This becomes the N vs NP problem.
+At the beginning, if we have an `a`, which path to we take? Do we go to the next `a`, or cycle on start? The answer is we take both paths, and if we take both, we are sure to eventually go on the right path. This becomes the N vs NP problem.
 
 Formally, a NFA $M$ is a 5-tuple $M=(\Sigma, Q, q_0, A, \delta)$, where:
 
@@ -80,7 +80,7 @@ Formally, a NFA $M$ is a 5-tuple $M=(\Sigma, Q, q_0, A, \delta)$, where:
 - $A \subseteq Q$ is a set of accepting states
 - $\delta: (Q\times E) \rightarrow$ Subset of $Q$, we have $2^{|Q|}$ possible subsets.
 
-**Example:** $L=\{cab\text{ or strings with an even number of $a$s}\}$, $\Sigma=\{a,b,c\}$.
+**Example:** $L=\{cab\text{ or strings with an even number of $a$'s}\}$, $\Sigma=\{a,b,c\}$.
 
 ```mermaid
 graph LR
@@ -98,7 +98,7 @@ E-- c,b -->E
 E-- a -->A
 ```
 
-The machine created is just a combination of a machine that takes even $a$s and a $cab$ machine. In the machine above however, the string $aacab$ is accepted. However, it creates a branch between the even $a$ machine and the $cab$ machine. We fix this by:
+The machine created is just a combination of a machine that takes even $a$'s and a $cab$ machine. In the machine above however, the string $aacab$ is accepted. However, it creates a branch between the even $a$ machine and the $cab$ machine. We fix this by:
 
 ```mermaid
 graph LR

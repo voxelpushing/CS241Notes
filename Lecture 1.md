@@ -32,7 +32,7 @@ For representing negative numbers, use the first bit as the sign. `1 := 負` and
 If n = 3, then 2ⁿ = 8. We have the bit patterns of:
 `000 001 010 011    100     101 110 111`
 ` 0   1   2   3   4-8 = -4   -3  -2  -1`
-Now, the range of numbers for a n-bit number is $-2^{n-1}$ to $-2^{n-1}-1$. We have only 1s and 0s, the left bit still gives the sign but addition is just $\mod{2^n}$.
+Now, the range of numbers for a n-bit number is $-2^{n-1}$ to $-2^{n-1}-1$. We have only 1s and 0s, the left bit still gives the sign but addition is just $\bmod{2^n}$.
 Alternatively, positive numbers are as is, and negative numbers are derived using a bit flip for the magnitude and adding 1.
 *-73 to 8-bit binary (two’s complement) would be:*
 

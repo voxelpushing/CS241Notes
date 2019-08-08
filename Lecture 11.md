@@ -1,10 +1,8 @@
 # Lecture 11
 
-CS 241 - June 11, 2019
-
 ## Top-Down Parsing
 
-start with $S$, apply grammar rules to get $w$
+Start with $S$, apply grammar rules to get $w$
 
 $S \Rightarrow \alpha_1 \Rightarrow \alpha_2 \Rightarrow … \Rightarrow w$
 
@@ -16,7 +14,7 @@ Invariant: consumed input + reverse (stack contents) = $\alpha_i$
 
 When top of stack is a non-terminal $A$:
 
-- pop $A$ and push $\alpha^R$ ($\alpha$ reverse) where $A \rightarrow alpha$ is a grammar rule
+- pop $A$ and push $\alpha^R$ ($\alpha$ reversed) where $A \rightarrow \alpha$ is a grammar rule
 
 When top of stack is terminal
 
@@ -42,20 +40,20 @@ Supposed $w = abywx$
 5. $B \rightarrow z$
 6. $B \rightarrow wx$
 
-| Stack             | Read                  | Unread                | Action                             | Note                                            |
-| ----------------- | --------------------- | --------------------- | ---------------------------------- | ----------------------------------------------- |
-| $S'$              | $\epsilon$            | $\vdash abywx \dashv$ | Pop $S'$, push $\dashv, S, \vdash$ | only used TOS to choose rule                    |
-| $\dashv S \vdash$ | $\epsilon$            | $\vdash abywx \dashv$ | Match $\vdash$                     |                                                 |
-| $\dashv S$        | $\vdash$              | $abywx \dashv$        | Pop $S$, push $B,y,A$              |                                                 |
-| $\dashv B y A$    | $\vdash$              | $abywx \dashv$        | Pop $A$, push $b,a$                | choose rule based on TOS and next input symbbol |
-| $\dashv B y ba$   | $\vdash$              | $abywx \dashv$        | Match $a$                          |                                                 |
-| $\dashv B y b$    | $\vdash a$            | $bywx \dashv$         | Match $b$                          |                                                 |
-| $\dashv B y$      | $\vdash ab$           | $ywx \dashv$          | Match $y$                          |                                                 |
-| $\dashv B$        | $\vdash aby$          | $wx \dashv$           | Pop $B$, push $x, w$               |                                                 |
-| $\dashv xw$       | $\vdash aby$          | $wx \dashv$           | Match $w$                          |                                                 |
-| $\dashv x$        | $\vdash abyw$         | $x \dashv$            | Match $x$                          |                                                 |
-| $\dashv$          | $\vdash abywx$        | $\dashv$              | Match $\dashv$                     |                                                 |
-|                   | $\vdash abywx \dashv$ |                       |                                    | Accept when stack is empty and no more input    |
+| Stack             | Read                  | Unread                | Action                             | Note                                                    |
+| ----------------- | --------------------- | --------------------- | ---------------------------------- | ------------------------------------------------------- |
+| $S'$              | $\varepsilon$         | $\vdash abywx \dashv$ | Pop $S'$, push $\dashv, S, \vdash$ | only used TOS to choose rule                            |
+| $\dashv S \vdash$ | $\varepsilon$         | $\vdash abywx \dashv$ | Match $\vdash$                     |                                                         |
+| $\dashv S$        | $\vdash$              | $abywx \dashv$        | Pop $S$, push $B,y,A$              |                                                         |
+| $\dashv B y A$    | $\vdash$              | $abywx \dashv$        | Pop $A$, push $b,a$                | choose rule based on top of stack and next input symbol |
+| $\dashv B y ba$   | $\vdash$              | $abywx \dashv$        | Match $a$                          |                                                         |
+| $\dashv B y b$    | $\vdash a$            | $bywx \dashv$         | Match $b$                          |                                                         |
+| $\dashv B y$      | $\vdash ab$           | $ywx \dashv$          | Match $y$                          |                                                         |
+| $\dashv B$        | $\vdash aby$          | $wx \dashv$           | Pop $B$, push $x, w$               |                                                         |
+| $\dashv xw$       | $\vdash aby$          | $wx \dashv$           | Match $w$                          |                                                         |
+| $\dashv x$        | $\vdash abyw$         | $x \dashv$            | Match $x$                          |                                                         |
+| $\dashv$          | $\vdash abywx$        | $\dashv$              | Match $\dashv$                     |                                                         |
+|                   | $\vdash abywx \dashv$ |                       |                                    | Accept when stack is empty and no more input            |
 
 What if TOS is $A$ and
 
@@ -160,7 +158,7 @@ A grammar is called $LL(1)$ if each cell of the predictor table contains at most
 
 Automatically compute predictor tabble
 
-$Predict(A,a)$: rules that apply when $A$ is TOS and $a$ is the next input symbol
+$\text{Predict}(A,a)$: rules that apply when $A$ is TOS and $a$ is the next input symbol
 
 $=\{A \rightarrow \beta \mid a \in \text{First}(\beta) \}$,  $\beta \in V^*$ where $V = \Sigma \cup N$
 
@@ -210,7 +208,7 @@ $A \rightarrow cd$
 
 $B \rightarrow b$
 
-$A \rightarrow \epsilon$
+$A \rightarrow \varepsilon$
 
 
 
@@ -222,4 +220,4 @@ $\text{First}(B) = \{ b \}$
 
 
 
-The rule above is not quite correct: need to consider rules that go to $\epsilon$ (nullables)
+The rule above is not quite correct: need to consider rules that go to $\varepsilon$ (nullables)

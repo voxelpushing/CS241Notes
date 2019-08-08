@@ -119,3 +119,30 @@ lis $3 .word 4
 ---
 
 **Register allocation** is cheaper than pushing and popping shit from the stack. We can put our most used variabble into a register for maximal savings.
+
+---
+
+We want $v_0$ be the equal to $\$250$ million for NPV to be 0. We also note the following relation between levered values:
+$$
+v_n = \frac{v_{n+1}+f_{n+1}-t_{n+1}}{1.11}+t_n
+$$
+
+
+We also note that $v_{10}$ is equal to $f_{10}(1+g)/(11\%-g)$, where $g$ is the perpetual growth rate we want to obtain. So we solve for $v_{10}$ first, then solve for $g$.
+
+---
+
+Let $r$ be the desired non-market interest rate. Then we have:
+$$
+\begin{align*}
+54,437,216.04 &= 200,000,000-200,000,000r(1-0.3)A^{10}_{0.06}-\frac{200,000,000}{1.06^{10}}\\
+200,000,000r(1-0.3)A^{10}_{0.06} &= 200,000,000-54,437,216.04-200,000,000\times1.06^{-10}\\
+r&=\frac{200,000,000-54,437,216.04-200,000,000\times1.06^{-10}}{200,000,000(1-0.3)A^{10}_{0.06}}\\
+\end{align*}
+$$
+
+$$
+A^{10}_{0.06}:\\
+r:
+$$
+
